@@ -1,0 +1,91 @@
+/*
+ * RoomNotFound — base design tokens (Tailwind CSS v4)
+ * Colours taken from the UI design canvas "RoomNotFound UI Design".
+ *
+ * Already matching Tailwind defaults, so NOT redefined here:
+ *   - neutral palette (neutral-100…700)
+ *   - spacing scale (4px base: p-4 = 16px, etc.)
+ *   - radius (rounded-xs 2 … rounded-3xl 24, rounded-full)
+ *   - border widths (border, border-2, border-4)
+ *   - type scale (text-xs 12/16 … text-3xl 30/36) and weights
+ *   - shadows (shadow-xs … shadow-2xl)
+ */
+@import "tailwindcss";
+
+/* Font comes from next/font in layout.tsx */
+@theme inline {
+  --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+}
+
+@theme {
+  /* ---------- Primitive: brand (Saxion green) ---------- */
+  --color-brand-50: #e5f5f2;   /* light tint: selected cards, nav pill, Free */
+  --color-brand-100: #ccebe5;
+  --color-brand-500: #009c82;  /* Saxion green: donut, large shapes (not for text) */
+  --color-brand-700: #007a66;  /* buttons, top bar, links */
+  --color-brand-800: #005e4f;  /* text on brand-50 */
+
+  /* ---------- Primitive: status (canvas values) ---------- */
+  --color-danger-600: #c62828;  /* cancel / reject / delete */
+  --color-danger-50: #fbe9e9;
+  --color-warning-600: #b26a00; /* out of service, needs approval, in progress */
+  --color-warning-50: #fdf0dc;
+}
+
+/* Semantic tokens point at other variables, so they use `inline`:
+   each class gets the real value and nothing can be dropped as "unused". */
+@theme inline {
+  /* primary/* */
+  --color-primary: var(--color-brand-700);       /* bg-primary, text-primary */
+  --color-primary-light: var(--color-brand-50);  /* bg-primary-light */
+  --color-on-primary: var(--color-white);        /* text-on-primary */
+  --color-on-primary-light: var(--color-brand-800); /* text on bg-primary-light */
+  --color-accent: var(--color-brand-500);        /* donut, big shapes */
+
+  /* bg/* */
+  --color-page: var(--color-neutral-100);        /* bg-page #F5F5F5 */
+  --color-surface: var(--color-white);           /* bg-surface (cards) */
+  --color-muted: var(--color-neutral-200);       /* bg-muted (photo placeholders) */
+
+  /* border/* */
+  --color-line: var(--color-neutral-200);        /* border-line #E5E5E5 (cards) */
+  --color-line-strong: var(--color-neutral-300); /* border-line-strong #D4D4D4 (inputs) */
+  --color-line-focus: var(--color-neutral-700);  /* border-line-focus, ring-line-focus */
+
+  /* text/* */
+  --color-fg: var(--color-neutral-700);          /* text-fg #404040 */
+  --color-fg-secondary: var(--color-neutral-500);/* text-fg-secondary #737373 */
+  --color-fg-disabled: var(--color-neutral-400); /* text-fg-disabled #A3A3A3 */
+
+  /* status/* */
+  --color-warning: var(--color-warning-600);     /* text-warning */
+  --color-warning-light: var(--color-warning-50);/* bg-warning-light */
+  --color-danger: var(--color-danger-600);       /* text-danger, bg-danger */
+  --color-danger-light: var(--color-danger-50);  /* bg-danger-light */
+  --color-free: var(--color-brand-800);          /* text-free */
+  --color-free-light: var(--color-brand-50);     /* bg-free-light */
+  --color-booked: var(--color-neutral-500);      /* text-booked */
+  --color-booked-light: var(--color-neutral-200);/* bg-booked-light */
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-page text-fg font-sans text-base antialiased;
+  }
+
+  /* Default border colour = border/default, so a bare `border` class matches the design */
+  *,
+  ::before,
+  ::after {
+    border-color: var(--color-line);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-line-focus);
+    outline-offset: 2px;
+  }
+}
